@@ -11,12 +11,12 @@ import android.widget.Toast;
 /**
  * Created by Ankit on 27-03-2016.
  */
-public class tests extends AppCompatActivity {
+public class Spinner_test extends AppCompatActivity {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_layout);
+        setContentView(R.layout.spinner_test);
 
 
         spinner = (Spinner)findViewById(R.id.spinner);
@@ -27,7 +27,7 @@ public class tests extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(parent.getItemAtPosition(position)!="none")
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected ", Toast.LENGTH_LONG).show();
             }
 
             @Override

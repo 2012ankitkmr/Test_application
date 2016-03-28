@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Gallery;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,49 +27,24 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+NavigationView navigationView = null;
+    Toolbar toolbar = null;
 
-    private Button bt;
-    private ListView lv;
-    private ArrayList <String> strArr;
-    private ArrayAdapter<String> adapter;
-    private EditText et;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+//Set  the fragment initially
+        Mainfragment fragment = new Mainfragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace( R.id.fragment_container , fragment );
+        fragmentTransaction.commit();
+
+
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        bt = (Button)findViewById(R.id.Badd);
-        lv = (ListView)findViewById(R.id.listView);
-        et = (EditText)findViewById(R.id.editText);
-        strArr = new ArrayList <String> ();
-        for(int i = 0 ; i < 2 ; i++ )
-        {
-            strArr.add("Row:" + i);
-        }
-        adapter = new ArrayAdapter <String> ( getApplicationContext() , android.R.layout.simple_list_item_1 , strArr ){
-    public View getView(int position, View convertView,
-                        ViewGroup parent) {
-        View view =super.getView(position, convertView, parent);
-
-        TextView textView=(TextView) view.findViewById(android.R.id.text1);
-
-            /*YOUR CHOICE OF COLOR*/
-        textView.setTextColor(Color.BLUE);
-
-        return view;
-    }
-};
-        lv.setAdapter(adapter);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                strArr.add(et.getText().toString());
-                adapter.notifyDataSetChanged();
-
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -76,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -119,8 +95,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            Mainfragment fragment = new Mainfragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace( R.id.fragment_container , fragment );
+            fragmentTransaction.commit();
+
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            gallery fragment = new gallery();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace( R.id.fragment_container , fragment );
+            fragmentTransaction.commit();
+
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -137,20 +123,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onBClick(View v)
-    {
-        if(v.getId()==R.id.Bact)
-        {
-            Intent i= new Intent(MainActivity.this,ScrollingActivity.class);
-            startActivity(i);
-        }
-    }
-    public void onTabClick(View v)
-    {
-        if(v.getId()==R.id.Btab)
-        {
-            Intent i= new Intent(MainActivity.this,tests.class);
-            startActivity(i);
-        }
-    }
+
+
 }

@@ -22,7 +22,10 @@
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".tests"></activity>
     </application>
+    <activity
+        android:name=".Spinner_test"
+        />
+    <activity android:name=".TextView_layout"/>
 
 </manifest>
